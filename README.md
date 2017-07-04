@@ -1,4 +1,4 @@
-## TWRP device tree for Galaxy SM-A520W (A5 2017 Exynos5)
+## Device tree for Galaxy SM-A520W (A5 2017 Exynos5)
 
 Add to `.repo/local_manifests/a5y17lte.xml`:
 
