@@ -5,7 +5,7 @@ Add to `.repo/local_manifests/a5y17lte.xml`:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-	<project path="device/samsung/a5y17lte" name="android_device_samsung_a5y17lte_can" remote="draekko" revision="master" />
+	<project path="device/samsung/a5y17lte" name="draekko/android_device_samsung_a5y17lte_can" remote="github" revision="master" />
 </manifest>
 ```
 
