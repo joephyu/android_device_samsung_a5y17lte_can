@@ -1,3 +1,4 @@
+# Universal7880
 ro.hardware=samsungexynos7880
 ro.chipname=exynos7880
 ro.arch=exynos7880
@@ -6,7 +7,12 @@ ro.lcd_min_brightness=0
 ro.lcd_brightness=162
 ro.sf.lcd_density=480
 persist.sys.usb.config=mtp,adb
-#
-# system.prop for a5y17lte
-#
 
+# Encryption
+#ro.sec.fle.encryption=true
+#security.mdpp=None
+security.mdpp.mass=skmm
+#security.mdpp.result=None
+#ro.security.mdpp.ver=2.0
+#ro.security.mdpp.release=8
+#ro.hardware.keystore=mdfpp

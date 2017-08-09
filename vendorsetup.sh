@@ -14,5 +14,6 @@
 # limitations under the License.
 #
 
-add_lunch_combo omni_a5y17lte-eng
+add_lunch_combo lineage_a5y17lte-eng
+add_lunch_combo lineage_a5y17lte-userdebug
 
