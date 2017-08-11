@@ -1,0 +1,27 @@
+diff --git a/Android.mk b/Android.mk
+index 85cdd325..ebb6fa74 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -109,6 +109,9 @@ LOCAL_C_INCLUDES += \
+     system/core/libsparse \
+     external/zlib
+ 
++LOCAL_C_INCLUDES += bootable/recovery \
++    bootable/recovery/minui
++
+ LOCAL_C_INCLUDES += bionic
+ ifeq ($(shell test $(PLATFORM_SDK_VERSION) -lt 23; echo $$?),0)
+     LOCAL_C_INCLUDES += external/stlport/stlport external/openssl/include
+diff --git a/variables.h b/variables.h
+index bcf228c4..7b02926a 100644
+--- a/variables.h
++++ b/variables.h
+@@ -18,7 +18,7 @@
+ #define _VARIABLES_HEADER_
+ 
+ #define TW_MAIN_VERSION_STR       "3.1.1"
+-#define TW_VERSION_STR TW_MAIN_VERSION_STR TW_DEVICE_VERSION
++#define TW_VERSION_STR TW_MAIN_VERSION_STR TW_DEVICE_VERSION " DRAEKKO"
+ 
+ #define TW_USE_COMPRESSION_VAR      "tw_use_compression"
+ #define TW_FILENAME                 "tw_filename"

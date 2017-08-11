@@ -34,7 +34,8 @@ TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a53
+#TARGET_2ND_CPU_VARIANT := cortex-a53
+TARGET_2ND_CPU_VARIANT := generic
 
 # Binder
 TARGET_USES_64_BIT_BINDER := true
@@ -43,47 +44,41 @@ TARGET_USES_64_BIT_BINDER := true
 BOARD_KERNEL_CMDLINE := # Exynos doesn't take cmdline arguments from boot image
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
-#BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/samsung/a5y17lte/dt.img
-#BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --board SRPPK04B000RU
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt $(LOCAL_PATH)/dt.img
 #BOARD_KERNEL_SEPARATED_DT := true
 #TARGET_CUSTOM_DTBTOOL := dtbhtoolExynos
+#BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/samsung/a5y17lte/dt.img
+#BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --board SRPPK04B000RU
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --board SRPPK04B000KU --dt $(LOCAL_PATH)/dt.img
 BOARD_VENDOR := samsung
-#TARGET_KERNEL_CONFIG := Stock_Kernel_a5y17lte_defconfig
-#TARGET_KERNEL_SOURCE := kernel/samsung/a5y17lte
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_USES_UNCOMPRESSED_KERNEL := true
-TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CONFIG := a5y17ltevl_00_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/a5y17lte
 #TARGET_PREBUILT_KERNEL := device/samsung/a5y17lte/kernel
-#TARGET_PREBUILT_DTB := device/samsung/a5y17lte/dt.img
 #TARGET_PREBUILT_KERNEL := $(DEVICE_TREE)/kernel
-#TARGET_PREBUILT_DTB := $(DEVICE_TREE)/dt.img
 
 # DTB
+#TARGET_PREBUILT_DTB := device/samsung/a5y17lte/dt.img
+#TARGET_PREBUILT_DTB := $(DEVICE_TREE)/dt.img
 #TARGET_DTBH_PLATFORM_CODE := 0x000050a6
 #TARGET_DTBH_SUBTYPE_CODE  := 0x217584da
 
-# blockdev --getbsz /dev/block/mmcblk0p9
-BOARD_FLASH_BLOCK_SIZE := 4096
+#BOARD_FLASH_BLOCK_SIZE := 4096
 
 # Partition info
 TARGET_USERIMAGES_USE_EXT4 := true
 #TARGET_PLATFORM_DEVICE_BASE := /devices/13540000.dwmmc0/
-BOARD_BOOTIMAGE_PARTITION_SIZE := 0x2000000
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x2600000
 #BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x16A800000 BAD
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x12F000000
 #BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x5B0000000 BAD
 #BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x5AFFFB000 # 5B0000000 - 20480 (footer)#
 #BOARD_CACHEIMAGE_PARTITION_SIZE := 0x19000000 BAD
 #BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x5F9400000
-# 0x5F9400000 - 20480 (footer)
+# 0x5F9400000 - 20480 (footer) = 0x5F93FB000
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0x2000000
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x2600000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x12F000000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x5F93FB000
 BOARD_CACHEIMAGE_PARTITION_SIZE := 0xC800000
-BOARD_FLASH_BLOCK_SIZE := 131072
+BOARD_FLASH_BLOCK_SIZE := 4096
 
 # Use this flag if the board has a ext4 partition larger than 2gb
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -99,8 +94,8 @@ TARGET_SCREEN_WIDTH := 1080
 #####################################################################################
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
-#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/recovery.fstab
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/twrp.fstab
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/recovery.fstab
+#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/twrp.fstab
 
 # TWRP-specific
 #RECOVERY_VARIANT := twrp
@@ -121,13 +116,15 @@ TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_EXCLUDE_SUPERSU := true
 TW_NO_EXFAT_FUSE := true
 TW_INCLUDE_NTFS_3G := true
-#TW_MTP_DEVICE := "/dev/mtp_usb"
+TW_MTP_DEVICE := "/dev/mtp_usb"
+#TW_MTP_DEVICE := "/dev/usb_mtp_gadget"
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 162
-TW_BRIGHTNESS_PATH := "/sys/devices/14800000.dsim/backlight/panel/brightness"
-#TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
+#TW_BRIGHTNESS_PATH := "/sys/devices/14800000.dsim/backlight/panel/brightness"
+TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
 
 # TWRP encryption
+TW_CRYPTO_USE_SYSTEM_VOLD := true
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_SAMSUNG := true
 #TARGET_HW_DISK_ENCRYPTION := true
@@ -135,7 +132,7 @@ TW_INCLUDE_CRYPTO_SAMSUNG := true
 # TWRP debug flags
 #TWRP_INCLUDE_LOGCAT := true
 #TARGET_USES_LOGD := true
-TWRP_EVENT_LOGGING := true
+#TWRP_EVENT_LOGGING := true
 
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/13600000.usb/13600000.dwc3/gadget/lun%d/file"
 TARGET_SYSTEM_PROP := device/samsung/a5y17lte/system.prop
